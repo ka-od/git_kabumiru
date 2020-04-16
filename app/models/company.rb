@@ -2,11 +2,7 @@ class Company < ApplicationRecord
 
 
   def haitou_rimawari
-    if :kabuka > 0
-       return :haitou/:kabuka
-    else
-       return "エラー"
-    end
+    return 100.0 * haitou / kabuka * 100.0
   end
 
 end
