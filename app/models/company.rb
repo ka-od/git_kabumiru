@@ -2,7 +2,7 @@ class Company < ApplicationRecord
 
 
   def haitou_rimawari
-    return 100.0 * haitou / kabuka * 100.0
+    return 100 * haitou / (kabuka * 100)
   end
 
 end
