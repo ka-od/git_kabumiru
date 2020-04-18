@@ -10,6 +10,9 @@ class CompanysController < ApplicationController
     @eiri_ritu = @company.eiri_ritu #@companyというインスタンスにeiri_rituというメソッドを使用。
   end
 
-
+  def search
+    # 検索フォームのキーワードをあいまい検索して、companysテーブルから銘柄情報を取得する
+    @companys = Company.where('name LIKE(?)', "%#{params[:keyword]}%")
+  end
 
 end
