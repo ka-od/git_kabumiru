@@ -7,7 +7,7 @@
 <% @companys.each do |company| %>
   <li>
     <a class="list" href="/companys/<%= company.id %>" title="<%= company.name %>">
-      <%= company.name %></span>
+      <%= company.id %> <%= company.name %>
     </a>
   </li>
 <% end %>
