@@ -1,15 +1,21 @@
 class Scraping
 #require 'mechanize'
 
-  def self.uriagedaka
+  def self.stock_info
     agent = Mechanize.new
-    page = agent.get("https://minkabu.jp/stock/3053/settlement")
     
-    name = page.search('.md_stockBoard_stockName').inner_text
-    uriagedaka = page.at('.ly_content_wrapper.size_ss .num.vamd').inner_text
+    num = 3401
+    while num < 3403 do
+      page = agent.get("https://minkabu.jp/stock/#{num}/settlement")
+      name = page.search('.md_stockBoard_stockName').inner_text
+      uriagedaka = page.at('.ly_content_wrapper.size_ss .num.vamd').inner_text
     
-    company = Company.new(name: name, uriagedaka: uriagedaka)
-    company.save
+      company = Company.where(id: num).first_or_initialize
+      company.name = name
+      company.uriagedaka = uriagedaka
+      company.save
+      num = num + 1
+    end
   end
 
 end
