@@ -14,9 +14,11 @@ class Scraping
       elements = meigara_page.search('.md_ntab_stock .md_notice_mini.dpib')
       if elements.inner_text.include?("決算")         #決算情報のページ有無確認して、上場廃止銘柄などでのエラー停止を回避
         page = agent.get("https://minkabu.jp/stock/#{com.id}/settlement")
-      
+        
+        #各項目についてスクレイピング。inner_textメソッドがnilではエラーとなるのでifで判定。
+        #数字にカンマ区切りがあると値を正しく保存できないため、deleteメソッドで数字以外を削除。
         name = page.at('.md_stockBoard_stockName').inner_text   if page.at('.md_stockBoard_stockName')
-        uriagedaka = page.at('.ly_content_wrapper.size_ss .num.vamd').inner_text  if page.at('.ly_content_wrapper.size_ss .num.vamd')
+        uriagedaka = page.at('.ly_content_wrapper.size_ss .num.vamd').inner_text.delete("^0-9")  if page.at('.ly_content_wrapper.size_ss .num.vamd')
     
         company = Company.where(id: com.id).first_or_initialize
         company.name = name
@@ -27,6 +29,7 @@ class Scraping
       end
     end   # "@companys.each" ここまで
   end   # "self.stock_info"　ここまで
+
 
 
 end
