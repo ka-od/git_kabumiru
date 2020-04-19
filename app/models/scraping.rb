@@ -7,7 +7,7 @@ class Scraping
     
     #companyクラスの全銘柄情報をデータベースから取得。
 #    @companys = Company.all
-    @companys = Company.find(1301, 1332, 9202)    #テスト用の記述
+    @companys = Company.find(1301, 1332)    #テスト用の記述
 
     #各銘柄情報をスクレイピング
     @companys.each do |com|
@@ -19,13 +19,18 @@ class Scraping
         #各項目についてスクレイピング。inner_textメソッドがnilではエラーとなるのでifで判定。
         #数字にカンマ区切りがあると値を正しく保存できないため、deleteメソッドで数字以外を削除。
         name = page.at('.md_stockBoard_stockName').inner_text   if page.at('.md_stockBoard_stockName')
-        uriagedaka = page.at('.ly_content_wrapper.size_ss .num.vamd').inner_text.delete("^0-9")  if page.at('.ly_content_wrapper.size_ss .num.vamd')
         kabuka = page.search('.stock_price').inner_text.delete("^0-9").to_f / 10   if page.search('.stock_price')
+
+        #決算情報の表から値をスクレイピング。
+        tables = page.search('.data_table.md_table.is_fix tbody tr td')
+        uriagedaka = tables[0].inner_text.delete("^0-9")   if tables
+        eigyou_rieki = tables[1].inner_text.delete("^0-9")   if tables
 
         #各項目をdbへ保存
         company = Company.where(id: com.id).first_or_initialize
         company.name = name
         company.uriagedaka = uriagedaka
+        company.eigyou_rieki = eigyou_rieki
         company.kabuka = kabuka
         company.save
       else
