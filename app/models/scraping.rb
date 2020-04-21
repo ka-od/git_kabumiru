@@ -25,13 +25,17 @@ class Scraping
         tables = page.search('.data_table.md_table.is_fix tbody tr td')
         uriagedaka = tables[0].inner_text.delete("^0-9")   if tables
         eigyou_rieki = tables[1].inner_text.delete("^0-9")   if tables
+        jun_rieki = tables[3].inner_text.delete("^0-9")   if tables
+        hitokabu_rieki = tables[4].inner_text.delete("^0-9")   if tables
 
         #各項目をdbへ保存
         company = Company.where(id: com.id).first_or_initialize
         company.name = name
+        company.kabuka = kabuka
         company.uriagedaka = uriagedaka
         company.eigyou_rieki = eigyou_rieki
-        company.kabuka = kabuka
+        company.jun_rieki = jun_rieki
+        company.hitokabu_rieki = hitokabu_rieki
         company.save
       else
         next
