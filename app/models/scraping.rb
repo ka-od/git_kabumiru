@@ -43,11 +43,12 @@ class Scraping
       if menus.inner_text.include?("株主優待")
         yutai_page = agent.get("https://minkabu.jp/stock/#{com.id}/yutai")
         
-        yutai = yutai_page.search('.tac.fwb.bglbl.lline.pbz span').inner_text.delete("^0-9")   if yutai_page.search('.tac.fwb.bglbl.lline.pbz span')
-        haitou = yutai_page.search('.tac.fwb.bglbl.pbz.lline span').inner_text.delete("^0-9")   if yutai_page.search('.tac.fwb.bglbl.pbz.lline span')
+        elements = yutai_page.search('.tac.fwb.bglbl.lline.pbz span')
+        haitou = elements[0].inner_text.delete("^0-9")   if elements
+        yutai = elements[1].inner_text.delete("^0-9")   if elements
         
-        company.yutai = yutai
         company.haitou = haitou
+        company.yutai = yutai
       end
 
       company.save
