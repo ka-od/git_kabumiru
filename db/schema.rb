@@ -10,20 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_21_205718) do
+ActiveRecord::Schema.define(version: 2020_04_23_192852) do
 
   create_table "companies", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name"
-    t.string "code"
     t.float "kabuka"
     t.float "haitou"
-    t.float "yuutai"
     t.float "uriagedaka"
     t.float "eigyou_rieki"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.float "jun_rieki"
     t.float "hitokabu_rieki"
+    t.float "yutai"
   end
 
 end
