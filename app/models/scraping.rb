@@ -27,22 +27,30 @@ class Scraping
 
       
       menus = meigara_page.search('.md_ntab_stock .md_notice_mini.dpib')     #メニュータブの項目を抽出
-      
+
+
+      #株価予想ページからスクレイピング
+      if menus.inner_text.include?("株価予想")
+        analysis_page = agent.get("https://minkabu.jp/stock/#{com.id}/analysis")
+        
+        elements = analysis_page.search('.ly_col.ly_colsize_7_fix .fsxl.fwb')
+        riron_kabuka = elements[0].inner_text.delete("^0-9")   if elements
+        
+        company.riron_kabuka = riron_kabuka
+      end
+
       #決算情報ページからスクレイピング
       if menus.inner_text.include?("決算")
         kessan_page = agent.get("https://minkabu.jp/stock/#{com.id}/settlement")
         
-        #決算情報の表から値をスクレイピング。
-        table_kessan = kessan_page.search('.data_table.md_table.is_fix tbody tr td')
+        table_kessan = kessan_page.search('.data_table.md_table td')
         uriagedaka = table_kessan[0].inner_text.delete("^0-9")   if table_kessan
         eigyou_rieki = table_kessan[1].inner_text.delete("^0-9")   if table_kessan
-        jun_rieki = table_kessan[3].inner_text.delete("^0-9")   if table_kessan
-        hitokabu_rieki = table_kessan[4].inner_text.delete("^0-9")   if table_kessan
+        jikoshihon_ritsu = table_kessan[23].inner_text   if table_kessan
 
         company.uriagedaka = uriagedaka
         company.eigyou_rieki = eigyou_rieki
-        company.jun_rieki = jun_rieki
-        company.hitokabu_rieki = hitokabu_rieki
+        company.jikoshihon_ritsu = jikoshihon_ritsu
       end
       
       #株主優待ページからスクレイピング
