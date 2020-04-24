@@ -15,9 +15,15 @@ class Scraping
       name = meigara_page.at('.md_stockBoard_stockName').inner_text   if meigara_page.at('.md_stockBoard_stockName')
       kabuka = meigara_page.search('.stock_price').inner_text.delete("^0-9").to_f / 10   if meigara_page.search('.stock_price')      
 
+      table_top = meigara_page.search('.ly_row.ly_gutters .ly_vamd dd')
+      haitou_rimawari = table_top[3].inner_text.delete("^0-9").to_f / 100   if table_top
+      pbr = table_top[7].inner_text.delete("^0-9").to_f / 100   if table_top
+
       company = Company.where(id: com.id).first_or_initialize
       company.name = name
       company.kabuka = kabuka
+      company.haitou_rimawari = haitou_rimawari
+      company.pbr = pbr
 
       
       menus = meigara_page.search('.md_ntab_stock .md_notice_mini.dpib')     #メニュータブの項目を抽出
@@ -27,11 +33,11 @@ class Scraping
         kessan_page = agent.get("https://minkabu.jp/stock/#{com.id}/settlement")
         
         #決算情報の表から値をスクレイピング。
-        tables = kessan_page.search('.data_table.md_table.is_fix tbody tr td')
-        uriagedaka = tables[0].inner_text.delete("^0-9")   if tables
-        eigyou_rieki = tables[1].inner_text.delete("^0-9")   if tables
-        jun_rieki = tables[3].inner_text.delete("^0-9")   if tables
-        hitokabu_rieki = tables[4].inner_text.delete("^0-9")   if tables
+        table_kessan = kessan_page.search('.data_table.md_table.is_fix tbody tr td')
+        uriagedaka = table_kessan[0].inner_text.delete("^0-9")   if table_kessan
+        eigyou_rieki = table_kessan[1].inner_text.delete("^0-9")   if table_kessan
+        jun_rieki = table_kessan[3].inner_text.delete("^0-9")   if table_kessan
+        hitokabu_rieki = table_kessan[4].inner_text.delete("^0-9")   if table_kessan
 
         company.uriagedaka = uriagedaka
         company.eigyou_rieki = eigyou_rieki
@@ -43,12 +49,10 @@ class Scraping
       if menus.inner_text.include?("株主優待")
         yutai_page = agent.get("https://minkabu.jp/stock/#{com.id}/yutai")
         
-        elements = yutai_page.search('.tac.fwb.bglbl.lline.pbz span')
-        haitou = elements[0].inner_text.delete("^0-9")   if elements
-        yutai = elements[1].inner_text.delete("^0-9")   if elements
+        table_yutai = yutai_page.search('.md_table_wrapper span')
+        yutai_rimawari = table_yutai[1].inner_text.delete("^0-9").to_f / 100   if table_yutai
         
-        company.haitou = haitou
-        company.yutai = yutai
+        company.yutai_rimawari = yutai_rimawari
       end
 
       company.save
