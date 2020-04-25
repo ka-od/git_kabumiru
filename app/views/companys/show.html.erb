@@ -1,6 +1,6 @@
 Kabumiru
 
-<p><%= params[:id] %> <%= @company.name %></p>
+<p><%= params[:id] %> <%= @company.name %> <%= "オススメ!!" if @yutai_hantei %></p>
 
 <p>株価 <%= @company.kabuka %> 円</p>
 
@@ -17,4 +17,3 @@ Kabumiru
 <p>　理論株価 <%= @company.riron_kabuka %> 円</p>
 
 <p>　PBR <%= @company.pbr %> </p>
-
