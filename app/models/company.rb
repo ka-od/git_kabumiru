@@ -14,7 +14,7 @@ class Company < ApplicationRecord
   
   #メソッド：割安度
   def wariyasudo
-    return  1- kabuka / riron_kabuka                 if kabuka.present? && riron_kabuka.present?
+    return  (1- kabuka / riron_kabuka) * 100                 if kabuka.present? && riron_kabuka.present?
   end
 
 
@@ -22,7 +22,7 @@ class Company < ApplicationRecord
   def yutai_hantei
     goukei_rimawari = haitou_rimawari + yutai_rimawari    if haitou_rimawari.present? && yutai_rimawari.present?
     wariyasudo = 1- kabuka / riron_kabuka                 if kabuka.present? && riron_kabuka.present?
-    if goukei_rimawari >= 4 && wariyasudo >= 0.2
+    if goukei_rimawari >= 4 && wariyasudo >= 25
     end
   end
 
