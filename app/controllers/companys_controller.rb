@@ -9,6 +9,7 @@ class CompanysController < ApplicationController
     @eiri_ritu = @company.eiri_ritu #@companyというインスタンスにeiri_rituというメソッドを使用。
     @goukei_rimawari = @company.goukei_rimawari
     @wariyasudo = @company.wariyasudo
+    @yutai_hantei = @company.yutai_hantei
   end
 
   def search
