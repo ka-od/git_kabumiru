@@ -22,7 +22,7 @@ class Company < ApplicationRecord
   def yutai_hantei
     goukei_rimawari = haitou_rimawari + yutai_rimawari      if haitou_rimawari.present? && yutai_rimawari.present?
     wariyasudo = (1- kabuka / riron_kabuka) * 100           if kabuka.present? && riron_kabuka.present?
-    if goukei_rimawari >= 3 && wariyasudo >= 25
+    if goukei_rimawari >= 4 && wariyasudo >= 25
       return  true
     end
   end
