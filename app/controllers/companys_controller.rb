@@ -6,9 +6,9 @@ class CompanysController < ApplicationController
   
   def show
     @company = Company.find(params[:id])  #companyクラスから調べたいidに該当する銘柄情報をデータベースから取得。
-    @eiri_ritu = @company.eiri_ritu #@companyというインスタンスにeiri_rituというメソッドを使用。
-    @goukei_rimawari = @company.goukei_rimawari
-    @wariyasudo = @company.wariyasudo
+    @eiri_ritu = @company.eiri_ritu.round(1)
+    @goukei_rimawari = @company.goukei_rimawari.round(2)
+    @wariyasudo = @company.wariyasudo.round(1)
     @yutai_hantei = @company.yutai_hantei
   end
 
