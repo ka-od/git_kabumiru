@@ -1,8 +1,12 @@
-Kabumiru
+<div class = "contents-title">
+  <div class = "name">
+    <%= params[:id] %> <%= @company.name %> <%= "オススメ!!" if @yutai_hantei %>
+  </div>
 
-<p><%= params[:id] %> <%= @company.name %> <%= "オススメ!!" if @yutai_hantei %></p>
-
-<p>株価 <%= @company.kabuka %> 円</p>
+  <div class = "kabuka">
+    株価 <%= @company.kabuka %> 円
+  </div>
+</div>
 
 <p>合計利回り <%= @goukei_rimawari %> %</p>
 
@@ -17,3 +21,4 @@ Kabumiru
 <p>　理論株価 <%= @company.riron_kabuka %> 円</p>
 
 <p>　PBR <%= @company.pbr %> </p>
+
