@@ -1,6 +1,6 @@
 .header {
     height: 80px;
-    background-color: #008000;
+    background-color: #333333;
     display: flex;
     
     font-family: "Seymour One", sans-serif;
@@ -39,8 +39,8 @@
 
 .contents-title {
     height: 50px;
-    background-color: #FFD700;
     display:  flex;
+    padding: 0px 40px;
 }
 
 .contents-name {
@@ -64,6 +64,7 @@
     font-size: 25px;
     border: solid #000000;
     border-width: 1px;
+    padding: 0px 10px;
 }
 
 .contents-top {
@@ -81,8 +82,20 @@
 
 .footer {
     height: 30px;
-    background-color: #008000;
+    background-color: #333333;
+    line-height: 30px;
+    font-size: 10px;
+    color: #FFFFFF;
+    text-align: right;
+    padding: 0px 10px;
 }
+
+
+
+
+
+
+
 
 
 
