@@ -1,37 +1,39 @@
-<div class = "contents-title">
-  <div class = "contents-name">
-    <%= params[:id] %> <%= @company.name %> <%= "オススメ!!" if @yutai_hantei %>
-  </div>
+<div class = "contents">
+  <div class = "contents-title">
+    <div class = "contents-name">
+      <%= params[:id] %> <%= @company.name %> <%= "オススメ!!" if @yutai_hantei %>
+    </div>
 
-  <div class = "contents-kabuka">
-    株価 <%= @company.kabuka %> 円
-  </div>
-</div>
-
-<div class = "contents-main">
-  <div class = "contents-element">
-    <div class = "contents-top">①利回り</div>
-    <div class = "contents-bottom">
-      <p>　合計利回り <%= @goukei_rimawari %> %</p>
-      <p>　配当利回り <%= @company.haitou_rimawari %> %</p>
-      <p>　優待利回り <%= @company.yutai_rimawari %> %</p>
+    <div class = "contents-kabuka">
+      株価 <%= @company.kabuka %> 円
     </div>
   </div>
 
-  <div class = "contents-element">
-    <div class = "contents-top">②収益性</div>
-    <div class = "contents-bottom">
-      <p>　売上高営業利益率 <%= @eiri_ritu %> %</p>
+  <div class = "contents-main">
+    <div class = "contents-element">
+      <div class = "contents-top">①利回り</div>
+      <div class = "contents-bottom">
+        <p>　合計利回り <%= @goukei_rimawari %> %</p>
+        <p>　配当利回り <%= @company.haitou_rimawari %> %</p>
+        <p>　優待利回り <%= @company.yutai_rimawari %> %</p>
+      </div>
     </div>
-  </div>
 
-  <div class = "contents-element">
-    <div class = "contents-top">③割安度</div>
-    <div class = "contents-bottom">
-      <p>　割安度 <%= @wariyasudo %> %</p>
-      <p>　理論株価 <%= @company.riron_kabuka %> 円</p>
-      <p>　PBR <%= @company.pbr %> </p>
+    <div class = "contents-element">
+      <div class = "contents-top">②収益性</div>
+      <div class = "contents-bottom">
+        <p>　売上高営業利益率 <%= @eiri_ritu %> %</p>
+      </div>
     </div>
-  </div>
 
+    <div class = "contents-element">
+      <div class = "contents-top">③割安度</div>
+      <div class = "contents-bottom">
+        <p>　割安度 <%= @wariyasudo %> %</p>
+        <p>　理論株価 <%= @company.riron_kabuka %> 円</p>
+        <p>　PBR <%= @company.pbr %> </p>
+      </div>
+    </div>
+
+  </div>
 </div>
