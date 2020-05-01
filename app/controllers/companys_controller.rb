@@ -14,7 +14,7 @@ class CompanysController < ApplicationController
 
   def search
     # 検索フォームのキーワードをあいまい検索して、companysテーブルから銘柄情報を取得する
-    @companys = Company.where('name LIKE(?)', "%#{params[:keyword]}%")
+    @companys = Company.where('name LIKE(?)', "%#{params[:keyword]}%").page(params[:page]).per(10)
   end
 
 end
