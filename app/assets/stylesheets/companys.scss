@@ -38,6 +38,9 @@
 
 .contents {
   height: calc(100vh - 110px);
+  background: url('bg.png') fixed;
+  background-size: cover;
+  color: #FFFFFF;
 }
 
 .contents-title {
