@@ -68,3 +68,4 @@ gem 'hirb'
 gem 'hirb-unicode'
 
 gem 'mechanize'
+gem 'kaminari'
