@@ -9,7 +9,10 @@ class CompanysController < ApplicationController
     @eiri_ritu = @company.eiri_ritu
     @goukei_rimawari = @company.goukei_rimawari
     @wariyasudo = @company.wariyasudo
-    @yutai_hantei = @company.yutai_hantei
+    @rimawari_hantei = @company.rimawari_hantei
+    @syuekisei_hantei = @company.syuekisei_hantei
+    @wariyasudo_hantei = @company.wariyasudo_hantei
+    @sougou_hantei = @company.sougou_hantei
   end
 
   def search

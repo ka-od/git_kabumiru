@@ -18,18 +18,38 @@ class Company < ApplicationRecord
   end
 
 
-  #メソッド：優待株オススメ判定
-  def yutai_hantei
-    if haitou_rimawari.present? && yutai_rimawari.present?
-      goukei_rimawari = haitou_rimawari + yutai_rimawari
 
-      if kabuka.present? && riron_kabuka.present?
-        wariyasudo = (1- kabuka / riron_kabuka) * 100
-
-        if goukei_rimawari >= 4 && wariyasudo >= 25
-          return  true
-        end
+  #メソッド：1. 利回り判定
+  def rimawari_hantei
+    if goukei_rimawari.present?
+      if goukei_rimawari >= 4
+        return  true
       end
+    end
+  end
+  
+  #メソッド：2. 収益性判定
+  def syuekisei_hantei
+    if eiri_ritu.present?
+      if eiri_ritu >= 10
+        return  true
+      end
+    end
+  end
+  
+  #メソッド：3. 割安度判定
+  def wariyasudo_hantei
+    if wariyasudo.present?
+      if wariyasudo >= 25
+        return  true
+      end
+    end
+  end
+  
+  #メソッド：総合判定
+  def sougou_hantei
+    if rimawari_hantei && syuekisei_hantei && wariyasudo_hantei
+      return  true
     end
   end
 
