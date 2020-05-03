@@ -63,6 +63,36 @@ class Scraping
         company.yutai_rimawari = yutai_rimawari
       end
 
+
+      #演算
+      eiri_ritu = (100 * eigyou_rieki / uriagedaka).round(1)                 if eigyou_rieki.present? && uriagedaka.present?
+      goukei_rimawari = (haitou_rimawari + yutai_rimawari).round(2)                if haitou_rimawari.present? && yutai_rimawari.present?
+      wariyasudo = ((1- kabuka / riron_kabuka) * 100).round(1)                if kabuka.present? && riron_kabuka.present?
+
+
+      #判定1  利回り判定
+      if goukei_rimawari.present?
+        rimawari_hantei = true    if goukei_rimawari >= 4
+      end
+
+      #判定2  収益性判定
+      if eiri_ritu.present?
+        syuekisei_hantei = true   if eiri_ritu >= 10
+      end
+  
+      #判定3  割安度判定
+      if wariyasudo.present?
+        wariyasudo_hantei = true      if wariyasudo >= 25
+      end
+  
+      #総合判定
+      sougou_hantei = true    if rimawari_hantei && syuekisei_hantei && wariyasudo_hantei
+
+      company.rimawari_hantei = rimawari_hantei
+      company.syuekisei_hantei = syuekisei_hantei
+      company.wariyasudo_hantei = wariyasudo_hantei
+      company.sougou_hantei = sougou_hantei
+      
       company.save
     end   # "@companys.each" ここまで
   end   # "self.stock_info"　ここまで
