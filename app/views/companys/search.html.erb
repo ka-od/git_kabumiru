@@ -1,10 +1,5 @@
 <div class = "contents">
-  <%= form_tag('/companys/search', method: :get) do %>
-    <input class="search__query" name="keyword" placeholder="銘柄名で検索" type="text" value=""><button class="btn-search" title="検索" type="submit">検索</button></input>
-  <% end %>
-  <form accept-charset="utf-8" action="/" class="js-search-submit" method="get">
-  </form>
-
+  <h2>検索結果</h2>
   <% @companys.each do |company| %>
     <li>
       <a class="list" href="/companys/<%= company.id %>" title="<%= company.name %>">
