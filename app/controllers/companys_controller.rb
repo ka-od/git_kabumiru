@@ -2,7 +2,7 @@ class CompanysController < ApplicationController
 
 
   def index
-    @companys = Company.where('goukei_rimawari >= ? and eiri_ritu >= ? and wariyasudo >= ?', 0, 0, 0)
+    @companys = Company.where('goukei_rimawari >= ? and eiri_ritu >= ? and wariyasudo >= ?', 0, 0, 0).page(params[:page]).per(10)
   end
   
   def show
