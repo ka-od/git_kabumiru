@@ -6,34 +6,41 @@
     font-family: "Seymour One", sans-serif;
     color: #FFFFFF;
     letter-spacing: 1px;
-    line-height: 80px;
 }
 
 .header_title {
     padding-left: 40px;
     font-size:  50px;
     width: 70%;
+    line-height: 80px;
 }
 
-.header_menu {
+.header_form {
     font-size:  20px;
-    width: 30%;
 }
 
-.header ul {
-    display: flex;
-    justify-content: center;
+.header input {
+    margin: 14px 0px 14px 30px;
+    padding: 5px;
+    border: solid #FFFFFF;
+    border-width: 1px;
+    color: #FFFFFF;
+    line-height: 40px;
 }
 
-.header li {
-    list-style: none;
-    margin: 0 20px;
+.header button {
+    margin: 14px 0px 14px 0px;
+    padding: 5px;
+    border: solid #ffffff;
+    border-width: 1px;
+    line-height: 40px;
 }
 
 .header a {
     text-decoration: none;
     color: #FFFFFF;
 }
+
 
 
 .contents {
@@ -90,6 +97,8 @@
   margin: 5px 30px;
 }
 
+
+
 .footer {
     height: 30px;
     background-color: #333333;
@@ -104,20 +113,7 @@
 }
 
 
-input {
-    margin: 10px 0px 10px 30px;
-    padding: 5px;
-    border: solid #FFFFFF;
-    border-width: 1px;
-    color: #FFFFFF;
-}
 
-
-button {
-    padding: 5px;
-    border: solid #ffffff;
-    border-width: 1px;
-}
 
 .pagination {
     margin: 5px 30px;
