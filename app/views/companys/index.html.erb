@@ -4,4 +4,9 @@
   <% end %>
   <form accept-charset="utf-8" action="/" class="js-search-submit" method="get">
   </form>
+
+  <% @companys.each do |company| %>
+    <%= company.name %>
+  <% end %>
+
 </div>

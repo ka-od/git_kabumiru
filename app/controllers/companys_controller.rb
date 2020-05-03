@@ -2,10 +2,11 @@ class CompanysController < ApplicationController
 
 
   def index
+    @companys = Company.where('goukei_rimawari >= ? and eiri_ritu >= ? and wariyasudo >= ?', 0, 0, 0)
   end
   
   def show
-    @company = Company.find(params[:id])  #companyクラスから調べたいidに該当する銘柄情報をデータベースから取得。
+    @company = Company.find(params[:id])
     @eiri_ritu = @company.eiri_ritu
     @goukei_rimawari = @company.goukei_rimawari
     @wariyasudo = @company.wariyasudo
