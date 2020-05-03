@@ -1,7 +1,11 @@
 <div class = "contents">
   <h2>推奨銘柄</h2>
   <% @companys.each do |company| %>
-    <%= company.name %>
+    <li>
+      <a class="list" href="/companys/<%= company.id %>" title="<%= company.name %>">
+        <%= company.id %> <%= company.name %>
+      </a>
+    </li>
   <% end %>
-
+  <%= paginate(@companys) %>
 </div>
