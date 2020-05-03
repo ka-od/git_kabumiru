@@ -34,7 +34,7 @@ class Scraping
         analysis_page = agent.get("https://minkabu.jp/stock/#{com.id}/analysis")
         
         elements = analysis_page.search('.ly_col.ly_colsize_7_fix .fsxl.fwb')
-        riron_kabuka = elements[0].inner_text.delete("^0-9")   if elements
+        riron_kabuka = elements[0].inner_text.delete("^0-9").to_f   if elements
         
         company.riron_kabuka = riron_kabuka
       end
@@ -44,8 +44,8 @@ class Scraping
         kessan_page = agent.get("https://minkabu.jp/stock/#{com.id}/settlement")
         
         table_kessan = kessan_page.search('.data_table.md_table td')
-        uriagedaka = table_kessan[0].inner_text.delete("^0-9")   if table_kessan
-        eigyou_rieki = table_kessan[1].inner_text.delete("^0-9")   if table_kessan
+        uriagedaka = table_kessan[0].inner_text.delete("^0-9").to_f   if table_kessan
+        eigyou_rieki = table_kessan[1].inner_text.delete("^0-9").to_f   if table_kessan
         jikoshihon_ritsu = table_kessan[23].inner_text   if table_kessan
 
         company.uriagedaka = uriagedaka
@@ -69,29 +69,9 @@ class Scraping
       goukei_rimawari = (haitou_rimawari + yutai_rimawari).round(2)                if haitou_rimawari.present? && yutai_rimawari.present?
       wariyasudo = ((1- kabuka / riron_kabuka) * 100).round(1)                if kabuka.present? && riron_kabuka.present?
 
-
-      #判定1  利回り判定
-      if goukei_rimawari.present?
-        rimawari_hantei = true    if goukei_rimawari >= 4
-      end
-
-      #判定2  収益性判定
-      if eiri_ritu.present?
-        syuekisei_hantei = true   if eiri_ritu >= 10
-      end
-  
-      #判定3  割安度判定
-      if wariyasudo.present?
-        wariyasudo_hantei = true      if wariyasudo >= 25
-      end
-  
-      #総合判定
-      sougou_hantei = true    if rimawari_hantei && syuekisei_hantei && wariyasudo_hantei
-
-      company.rimawari_hantei = rimawari_hantei
-      company.syuekisei_hantei = syuekisei_hantei
-      company.wariyasudo_hantei = wariyasudo_hantei
-      company.sougou_hantei = sougou_hantei
+      company.eiri_ritu = eiri_ritu
+      company.goukei_rimawari = goukei_rimawari
+      company.wariyasudo = wariyasudo
       
       company.save
     end   # "@companys.each" ここまで
