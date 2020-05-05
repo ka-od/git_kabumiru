@@ -69,3 +69,4 @@ gem 'hirb-unicode'
 
 gem 'mechanize'
 gem 'kaminari'
+gem 'whenever', :require => false
